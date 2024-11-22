@@ -1,6 +1,6 @@
 {
 	"name": "email-typo-fixer",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"description": "A TypeScript library that fixes common email typos and formatting issues",
 	"author": "Patrick Ullrich",
 	"license": "MIT",

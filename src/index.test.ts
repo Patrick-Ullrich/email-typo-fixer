@@ -273,13 +273,13 @@ describe("emailTypoFixer", () => {
 	describe("domain match distance configuration", () => {
 		test("should respect configured domain match distance", () => {
 			const result1 = emailTypoFixer("user@outl00k.com", {
-				domainMatchDistance: 2
+				domainMatchDistance: 2,
 			});
 			expect(result1.hasCorrection).toBe(false);
 			expect(result1.suggested).toBeUndefined();
 
 			const result2 = emailTypoFixer("user@outl00k.com", {
-				domainMatchDistance: 3
+				domainMatchDistance: 3,
 			});
 			expect(result2.hasCorrection).toBe(true);
 			expect(result2.suggested).toBe("user@outlook.com");
