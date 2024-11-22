@@ -19,12 +19,19 @@
 	"main": "dist/index.cjs",
 	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
 	"files": ["dist", "README.md", "LICENSE"],
 	"scripts": {
 		"lint": "biome check .",
 		"lint:ci": "biome ci .",
 		"lint:fix": "biome check . --write --unsafe",
-		"build": "tsup src/index.ts --format cjs,esm --dts --minify --treeshake --clean",
+		"build": "tsup src/index.ts --format esm,cjs --dts --minify --treeshake --clean --sourcemap",
 		"test": "bun test",
 		"test:watch": "bun test --watch",
 		"prepublishOnly": "bun run build"
