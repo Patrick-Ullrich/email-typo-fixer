@@ -14,6 +14,12 @@ A TypeScript library that fixes common email typos and formatting issues. It han
 - No external dependencies
 - Lightweight: ~2.4KB minified (ESM/CJS)
 
+## 🎮 Interactive Demo
+
+Try it out: [https://patrick-ullrich.github.io/email-typo-fixer/](https://patrick-ullrich.github.io/email-typo-fixer/)
+
+Note: The library does not ship with any UI components or styles. The demo is just for interactive exploration.
+
 ## Installation
 
 ```bash
