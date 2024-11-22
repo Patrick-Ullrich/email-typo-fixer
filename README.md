@@ -46,10 +46,10 @@ const result3 = emailTypoFixer('user@company.internal', {
 console.log(result3.suggested); // 'user@company.internal'
 
 // Combining default domains with custom domains
-const result4 = emailTypoFixer('user@gmial.com', {
-  domains: [...DEFAULT_DOMAINS, 'company.internal']
+const result4 = emailTypoFixer('user@comapny.com', {
+  domains: [...DEFAULT_DOMAINS, 'company.com']
 });
-console.log(result4.suggested); // 'user@gmail.com'
+console.log(result4.suggested); // 'user@comapny.com'
 ```
 
 ## 📘 API
