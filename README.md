@@ -104,6 +104,11 @@ import { emailTypoFixer, DEFAULT_DOMAINS } from 'email-typo-fixer';
 const customDomains = [...DEFAULT_DOMAINS, 'company.com', 'internal.corp'];
 ```
 
+## ❤️ Credits
+
+This project builds upon ideas from:
+- [email-spell-checker](https://github.com/ZooTools/email-spell-checker) - Implementation of the Sift3 algorithm and configurable domains approach
+
 ## 📝 Examples of Fixes
 
 Here are some common fixes the library handles:
