@@ -35,13 +35,19 @@ jobs:
       - name: Build library
         run: bun run build
 
+      - name: Copy and prepare files for deployment
+        run: |
+          cp demo/index.html dist/
+          # Update the import path in the copied index.html for deployment
+          sed -i 's|from '"'"'../dist/|from '"'"'./|g' dist/index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './demo'
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
