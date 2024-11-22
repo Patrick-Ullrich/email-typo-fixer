@@ -14,6 +14,7 @@ export const DEFAULT_DOMAINS = [
 
 interface EmailTypoFixerOptions {
 	domains?: string[];
+	domainMatchDistance?: number;
 }
 
 interface EmailTypoFixerResult {
@@ -45,6 +46,7 @@ export const emailTypoFixer = (
 
 	// Default domains if none provided
 	const domains = opts?.domains || DEFAULT_DOMAINS;
+	const maxDomainMatchDistance = opts?.domainMatchDistance ?? 3;
 
 	// Fix: Handle Outlook-style email format (e.g., "Firstname Lastname <test@test.com>")
 	const outlookEmailPattern = /<([^<>]+)>/;
@@ -201,7 +203,7 @@ export const emailTypoFixer = (
 
 		// If domain is different and distance is acceptable, suggest correction
 		if (
-			domainMatch.distance <= 2.5 &&
+			domainMatch.distance <= maxDomainMatchDistance &&
 			domain.toLowerCase() !== domainMatch.match?.toLowerCase()
 		) {
 			correctedEmail = `${localPart}@${domainMatch.match}`;

@@ -33,7 +33,13 @@ import { emailTypoFixer, DEFAULT_DOMAINS } from 'email-typo-fixer';
 
 // Basic usage (using default domains)
 const result = emailTypoFixer('user@gmial.com');
-console.log(result.suggested); // 'user@gmail.com'
+console.log(result); 
+// Output:
+// {
+//   original: 'user@gmial.com',
+//   suggested: 'user@gmail.com',
+//   hasCorrection: true
+// }
 
 // Outlook-style email
 const result2 = emailTypoFixer('John Doe <john.doe@@gmail.com>');
@@ -71,43 +77,27 @@ console.log(result4.suggested); // 'user@comapny.com'
       "aol.com"
     ]
     ```
+  - `domainMatchDistance`: Maximum allowed distance for domain corrections (default: 3). Lower values are more strict:
+    ```typescript
+    // More strict (only minor typos)
+    emailTypoFixer('user@outl00k.com', { domainMatchDistance: 2 }); // No correction
+
+    // Default behavior
+    emailTypoFixer('user@outl00k.com', { domainMatchDistance: 3 }); // Suggests: user@outlook.com
+    
+    // More lenient
+    emailTypoFixer('user@gmaillll.com', { domainMatchDistance: 5 }); // Suggests: user@gmail.com
+    ```
 
 #### Returns
 
 ```typescript
 interface EmailTypoFixerResult {
-  original: string;       // Original input
-  suggested?: string;     // Corrected email (if changes were made)
-  hasCorrection: boolean; // Whether any corrections were made
+  original: string;               // Original input
+  suggested: string | undefined;  // Corrected email (if changes were made)
+  hasCorrection: boolean;         // Whether any corrections were made
 }
 ```
-
-### `DEFAULT_DOMAINS`
-
-A constant array containing the default email domains used for corrections:
-
-```typescript
-export const DEFAULT_DOMAINS = [
-  "gmail.com",
-  "yahoo.com",
-  "hotmail.com",
-  "outlook.com",
-  "icloud.com",
-  "aol.com",
-] as const;
-```
-
-You can use this constant to extend the default domains with your own:
-```typescript
-import { emailTypoFixer, DEFAULT_DOMAINS } from 'email-typo-fixer';
-
-const customDomains = [...DEFAULT_DOMAINS, 'company.com', 'internal.corp'];
-```
-
-## ❤️ Credits
-
-This project builds upon ideas from:
-- [email-spell-checker](https://github.com/ZooTools/email-spell-checker) - Implementation of the Sift3 algorithm and configurable domains approach
 
 ## 📝 Examples of Fixes
 
@@ -120,6 +110,11 @@ Here are some common fixes the library handles:
 - Multiple Fixes: `"John Smith <test,user@@gmial..com>"` → `"test.user@gmail.com"`
 
 For a comprehensive list of examples and edge cases, check out our [test file](https://github.com/Patrick-Ullrich/email-typo-fixer/blob/main/src/index.test.ts)
+
+## ❤️ Acknowledgments
+
+This project builds upon ideas from:
+- [email-spell-checker](https://github.com/ZooTools/email-spell-checker) - Implementation of the Sift3 algorithm and configurable domains approach
 
 ## 📄 License
 
