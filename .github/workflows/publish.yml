@@ -1,0 +1,35 @@
+name: Publish to NPM
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 🏗️ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: 📦 Install dependencies
+        run: bun install
+
+      - name: 🔍 Lint
+        run: bun run lint:ci
+
+      - name: 🧪 Test
+        run: bun test
+
+      - name: 📦 Build
+        run: bun run build
+
+      - name: 🚀 Publish to NPM
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          npm publish --access=public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
