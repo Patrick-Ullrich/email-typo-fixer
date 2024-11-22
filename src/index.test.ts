@@ -265,7 +265,6 @@ describe("emailTypoFixer", () => {
 
 		test("should preserve valid special characters", () => {
 			const result = emailTypoFixer("user.name+tag@domain.com");
-			console.log(result);
 			expect(result.hasCorrection).toBe(false);
 			expect(result.original).toBe("user.name+tag@domain.com");
 		});
